@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "build": "mkdir -p dist && cp -r public/* dist/"
   },
   "author": "",
   "license": "ISC",
