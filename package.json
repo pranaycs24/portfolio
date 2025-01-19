@@ -1,0 +1,16 @@
+{
+  "name": "professor-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "build": "rm -rf dist && mkdir dist && cp -r public/* dist/ && cp index.html dist/",
+    "deploy": "gh-pages -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^6.1.0"
+  }
+}
