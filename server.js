@@ -1,5 +1,5 @@
 const express = require('express');
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const cheerio = require('cheerio');
 const cors = require('cors');
 require('dotenv').config();
@@ -28,7 +28,11 @@ app.get('/api/scholar', async (req, res) => {
     }
 
     // Fetch Google Scholar page
-    const response = await fetch('https://scholar.google.com/citations?user=VU5PNaIAAAAJ&hl=en');
+    const response = await fetch(`https://scholar.google.com/citations?user=${process.env.SCHOLAR_USER_ID}&hl=en`);
+    if (!response.ok) {
+      throw new Error(`Scholar page request failed with status ${response.status}`);
+    }
+    
     const html = await response.text();
     const $ = cheerio.load(html);
 
@@ -39,13 +43,6 @@ app.get('/api/scholar', async (req, res) => {
       const authors = $(el).find('.gs_gray').first().text().trim();
       const citation = $(el).find('.gsc_a_ac').text().trim() || '0';
       const year = $(el).find('.gsc_a_hc').text().trim();
-
-      console.log('Publication:', {
-        title,
-        authors,
-        citation,
-        year
-      });
 
       publications.push({
         title,
@@ -69,7 +66,10 @@ app.get('/api/scholar', async (req, res) => {
     res.json({ publications, stats });
   } catch (error) {
     console.error('Error fetching scholar data:', error);
-    res.status(500).json({ error: 'Failed to fetch scholar data' });
+    res.status(500).json({ 
+      error: 'Failed to fetch scholar data',
+      message: error.message
+    });
   }
 });
 
