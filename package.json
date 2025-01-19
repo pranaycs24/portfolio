@@ -5,12 +5,14 @@
   "main": "index.html",
   "scripts": {
     "build": "rm -rf dist && mkdir dist && cp -r public/* dist/ && cp index.html dist/",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gh-pages": "^6.1.0"
-  }
+    "gh-pages": "^6.3.0"
+  },
+  "homepage": "https://pranaycs24.github.io/portfolio/"
 }
