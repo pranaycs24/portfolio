@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    // "build": "rm -rf dist && mkdir dist && cp -r public/* dist/ && cp index.html dist/",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    // "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC",
