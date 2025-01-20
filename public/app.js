@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const publicationsList = document.getElementById('publications-list');
   
   // Fetch scholar data
-  fetch('/data/scholar.json')
+  fetch('./data/scholar.json')
     .then(response => response.json())
     .then(data => {
       if (data.error) {
